@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getProjects } from '../../lib/collections';
+
+const projects = await getProjects();
+---
+
+<BaseLayout title="项目档案" description="做过的机器人与工控安全项目">
+  <h1>项目档案</h1>
+  <p class="lede">每个项目写清：我负责什么、技术栈、以及做过的判断。</p>
+
+  {
+    projects.map((p) => (
+      <a class="card" href={`/projects/${p.id}/`}>
+        <p class="card-title">{p.data.name}</p>
+        <p class="card-sum">
+          {p.data.role} · {p.data.year} · {p.data.status}
+          {p.data.subtitle ? ` — ${p.data.subtitle}` : ''}
+        </p>
+        <p style="margin: 8px 0 0">
+          {p.data.stack.slice(0, 6).map((s) => (
+            <span class="tag">{s}</span>
+          ))}
+        </p>
+      </a>
+    ))
+  }
+</BaseLayout>

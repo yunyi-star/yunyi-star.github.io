@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getPosts, fmtDate as fmt } from '../../lib/collections';
+
+const posts = await getPosts();
+---
+
+<BaseLayout title="文章" description="工程复盘与技术记录">
+  <h1>文章</h1>
+  <p class="lede">调试过程、方案取舍、失败尝试。共 {posts.length} 篇。</p>
+
+  {
+    posts.map((post) => (
+      <a class="card" href={`/blog/${post.id}/`}>
+        <p class="card-title">{post.data.title}</p>
+        <p class="card-sum">
+          <span class="meta">{fmt(post.data.date)}</span> — {post.data.summary}
+        </p>
+        <p style="margin: 8px 0 0">
+          {post.data.tags.map((t) => (
+            <span class="tag">{t}</span>
+          ))}
+        </p>
+      </a>
+    ))
+  }
+</BaseLayout>

@@ -1,0 +1,52 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getProjects } from '../../lib/collections';
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const d = project.data;
+---
+
+<BaseLayout title={d.name} description={d.subtitle ?? d.role}>
+  <h1>{d.name}</h1>
+  {d.subtitle && <p class="lede">{d.subtitle}</p>}
+
+  <div class="kv">
+    <div class="kv-row"><span class="kv-k">年份</span><span class="kv-v">{d.year}</span></div>
+    <div class="kv-row"><span class="kv-k">我的角色</span><span class="kv-v">{d.role}</span></div>
+    <div class="kv-row">
+      <span class="kv-k">技术栈</span>
+      <span class="kv-v">{d.stack.join(' · ')}</span>
+    </div>
+    <div class="kv-row"><span class="kv-k">状态</span><span class="kv-v">{d.status}</span></div>
+    {d.repo && (
+      <div class="kv-row">
+        <span class="kv-k">代码</span>
+        <span class="kv-v"><a href={d.repo} target="_blank" rel="noopener">{d.repo}</a></span>
+      </div>
+    )}
+    {d.demo && (
+      <div class="kv-row">
+        <span class="kv-k">演示</span>
+        <span class="kv-v"><a href={d.demo} target="_blank" rel="noopener">{d.demo}</a></span>
+      </div>
+    )}
+  </div>
+
+  <div class="prose">
+    <Content />
+  </div>
+
+  <p style="margin-top: 40px">
+    <a href="/projects/">← 返回项目列表</a>
+  </p>
+</BaseLayout>
