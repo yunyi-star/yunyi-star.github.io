@@ -32,6 +32,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Check publication boundary
+        run: npm run check:public
+
+      - name: Test public examples
+        run: npm test
+
       - name: Build
         run: npm run build
 

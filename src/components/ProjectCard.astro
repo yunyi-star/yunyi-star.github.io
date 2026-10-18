@@ -1,0 +1,11 @@
+---
+const { project } = Astro.props;
+const d = project.data;
+---
+<a class="card project-card" href={`/projects/${project.id}/`}>
+  <p class="project-category">{d.category}</p>
+  <h3 class="card-title">{d.name}</h3>
+  <p class="card-sum">{d.subtitle}</p>
+  <p class="project-stack">{d.stack.slice(0, 5).join(' / ')}</p>
+  <p class="meta">{d.year} · {d.disclosure}</p>
+</a>

@@ -29,6 +29,8 @@ const projects = defineCollection({
     role: z.string(),
     stack: z.array(z.string()).default([]),
     status: z.string().default('进行中'),
+    category: z.string().default('项目实践'),
+    disclosure: z.string().default('项目说明'),
     repo: z.string().optional(),
     demo: z.string().optional(),
     weight: z.number().default(0),

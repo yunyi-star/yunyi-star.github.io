@@ -1,60 +1,46 @@
-# yunyi-star.github.io
+# yunyi-star · 工程项目作品集
 
-个人作品集 + 技术博客。Astro 7 + Content Collections。
+[访问作品集](https://yunyi-star.github.io/) · [项目档案](https://yunyi-star.github.io/projects/) · [交互演示](https://yunyi-star.github.io/lab/)
 
-## 本地运行
+这里展示机器人与软件系统实践。每份档案区分已有实现、关键取舍与公开范围；公开说明不代表原项目的全部材料可以再分发。
 
-依赖已装好，直接起：
+| 项目 | 可查看的成果 |
+| --- | --- |
+| [移动机器人侦察与抓取](src/content/projects/robot-mission.md) | 导航、视觉与机械臂的任务编排；独立状态机示例 |
+| [社区巡检机器人仿真](src/content/projects/community-navigation.md) | 路线配置、导航与感知接口、边界检查方法 |
+| [工控通信与防护原型](src/content/projects/industrial-guard.md) | 两端实现对齐、分层排障与安全认识复盘 |
+| [视觉与文档消息路由](src/content/projects/vision-router.md) | 递归消息处理、本地提取与降级；独立归一化示例 |
+| [英语词汇学习应用](src/content/projects/vocabulary-trainer.md) | 学习队列、间隔复习、本地进度；已有公开代码链接 |
 
-```bash
-npm run dev      # http://localhost:4321
+可运行示例说明见 [examples/README.md](examples/README.md)。示例为本站独立编写，使用虚构数据，不连接真实设备、读取个人文件或调用外部模型。
+
+## 开发与检查
+
+使用 Node.js 22.12+ 和 npm 9.6.5+。站点保留 Astro 与 Markdown 内容集合，无额外运行时服务或分析追踪。
+
+```sh
+npm ci
+npm run dev
+npm run check:public
+npm test
+npm run build
+npm run preview
 ```
 
-换机器或重新装依赖：
+不安装依赖也可以运行通用示例测试：
 
-```bash
-npm install
+```sh
+node --test tests/examples.test.mjs
 ```
 
-> 若 `npm install` 报 `esbuild ... EBUSY`（Windows 上偶发，postinstall 校验阶段），
-> 用 `npm install --ignore-scripts` 即可 —— esbuild 二进制本来就在平台包里，跳过校验不影响构建。
+## 维护内容
 
-## 构建
+项目放在 `src/content/projects/`，文章放在 `src/content/blog/`。以 `_` 开头的文件为模板，站点会忽略。新增公开文件后，审查其内容并更新 `publication-manifest.json`。
 
-```bash
-npm run build    # 产物在 dist/
-npm run preview  # 本地预览构建产物
-```
-
-## 写内容
-
-不用碰任何配置，只往这两个目录丢 Markdown：
-
-| 目录 | 内容 | 模板 |
-|---|---|---|
-| `src/content/blog/` | 经验贴 | `_模板.md` |
-| `src/content/projects/` | 项目档案 | `_模板.md` |
-
-以 `_` 开头的文件会被忽略，当作模板存放。新文件复制模板、去掉下划线命名即可。
-
-文章 frontmatter：`title` / `date` / `summary` / `tags` / `draft`
-项目 frontmatter：`name` / `subtitle` / `year` / `role` / `stack` / `status` / `repo` / `demo` / `weight`
-
-`weight` 越大越靠前（首页只显示前 4 个）。
+公开边界与发布流程见 [docs/publishing-policy.md](docs/publishing-policy.md)。私有评估记录不进入此仓库。更改当前页面不会清除既有 Git 历史或外部副本。
 
 ## 部署
 
-仓库名为 `yunyi-star.github.io`（GitHub 用户页），推送到 main 后 GitHub Actions 自动构建部署。
+保留现有 GitHub Pages 工作流。推送到 `main` 后，GitHub Actions 安装依赖、检查公开文件清单、执行示例测试，再构建和部署 `dist/`。仓库 Pages 来源应为 GitHub Actions。
 
-首次需要：仓库 Settings → Pages → Source 选 **GitHub Actions**。
-
-## 结构
-
-```
-src/
-├── content.config.ts    两类内容的定义（blog / projects）
-├── content/             内容全在这里
-├── layouts/             页面框架
-├── pages/               首页 / 项目 / 文章 / 关于
-└── styles/              全局样式
-```
+第三方框架和词汇数据的许可由其原始项目决定，本仓库不重新授权第三方材料。

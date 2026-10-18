@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout title="消息归一化演示 · yunyi-star" description="将虚构的嵌套图片、文档和工具消息整理为文本。">
+  <a class="back-link" href="/lab/">返回演示列表</a>
+  <h1>嵌套消息如何变成文本</h1>
+  <p class="lede">选一组虚构消息，观察归一化前后的结构。这里的“提取结果”是预先写好的示例文字，不会上传文件或调用模型。</p>
+  <noscript><p>交互演示需要 JavaScript。项目介绍和示例源码仍可直接阅读。</p></noscript>
+  <section class="experiment" aria-labelledby="message-scenario-title">
+    <h2 id="message-scenario-title">选择示例</h2>
+    <div class="event-controls" aria-label="消息场景">
+      <button type="button" data-scenario="nested" aria-pressed="true" disabled>嵌套工具结果</button>
+      <button type="button" data-scenario="failure" aria-pressed="false" disabled>文档提取失败</button>
+      <button type="button" data-scenario="text" aria-pressed="false" disabled>纯文本</button>
+    </div>
+    <h3>输入结构</h3>
+    <pre id="message-input" class="message-json" tabindex="0">等待加载示例</pre>
+    <button id="normalize" type="button" disabled>转换为文本消息</button>
+    <h3>输出结构</h3>
+    <pre id="message-output" class="message-json" tabindex="0">点击转换，查看结果。</pre>
+    <p id="message-status" role="status"></p>
+  </section>
+  <div class="prose">
+    <h2>这里要检查什么</h2>
+    <p>嵌套在工具结果中的内容也应被处理。转换完成后只剩文本块；没有获取到的内容必须显示失败，不能被悄悄丢弃，也不能用猜测补齐。</p>
+    <p>真实服务还需要处理权限、输入大小、网络边界和解析器隔离，这个演示只解释结构转换。<a href="/projects/vision-router/">阅读路由工具档案</a>，或<a href="https://github.com/yunyi-star/yunyi-star.github.io/tree/main/public/examples">查看通用示例代码</a>。</p>
+  </div>
+  <script is:inline type="module" src="/examples/messages-ui.mjs"></script>
+</BaseLayout>

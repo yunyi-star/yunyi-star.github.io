@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout title="任务状态机演示 · yunyi-star" description="通过到达、等待、超时与急停事件理解机器人任务编排。">
+  <a class="back-link" href="/lab/">返回演示列表</a>
+  <h1>任务如何推进，也如何停下来</h1>
+  <p class="lede">这条虚构任务链包含两个观察点和一个信号灯。你来提供事件，执行器只在满足条件时推进。</p>
+  <noscript><p>交互演示需要 JavaScript。项目介绍和示例源码仍可直接阅读。</p></noscript>
+  <ol class="task-track" aria-label="示例任务顺序">
+    <li>观察点 A</li><li>信号灯</li><li>观察点 B</li>
+  </ol>
+  <section class="experiment" aria-labelledby="mission-status-title">
+    <h2 id="mission-status-title">当前状态</h2>
+    <p id="mission-state" class="state-value" aria-live="polite">等待开始</p>
+    <p id="mission-detail">点击开始任务，进入第一个观察点的导航。</p>
+    <div class="event-controls" aria-label="发送事件">
+      <button type="button" data-event="start" disabled>开始任务</button>
+      <button type="button" data-event="arrived" disabled>到达目标</button>
+      <button type="button" data-event="observed" disabled>观察完成</button>
+      <button type="button" data-event="green" disabled>收到绿灯</button>
+      <button type="button" data-event="timeout" disabled>导航超时</button>
+      <button type="button" data-event="retry" disabled>执行重试</button>
+      <button type="button" data-event="emergency" class="danger" disabled>急停</button>
+    </div>
+    <button id="mission-reset" type="button" class="secondary" disabled>重新开始演示</button>
+    <h3>事件记录</h3>
+    <ol id="mission-log" class="event-log" aria-label="事件记录"><li>等待开始</li></ol>
+  </section>
+  <div class="prose">
+    <h2>可以试试</h2>
+    <p>先正常完成一遍，再在导航中触发超时。第一次超时需要显式重试；同一目标重试后仍超时，任务停止。信号灯任务必须等到绿灯，急停后也不能靠“到达”事件恢复。</p>
+    <p>这是任务编排的教学模型，不控制真实机器人。<a href="/projects/robot-mission/">阅读机器人项目档案</a>，或<a href="https://github.com/yunyi-star/yunyi-star.github.io/tree/main/public/examples">查看通用示例代码</a>。</p>
+  </div>
+  <script is:inline type="module" src="/examples/mission-ui.mjs"></script>
+</BaseLayout>

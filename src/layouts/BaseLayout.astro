@@ -7,7 +7,8 @@ interface Props {
 }
 
 const { title, description = '' } = Astro.props;
-const siteTitle = '王余勃';
+const siteTitle = 'yunyi-star';
+const currentPath = Astro.url.pathname;
 ---
 
 <!doctype html>
@@ -20,18 +21,20 @@ const siteTitle = '王余勃';
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   </head>
   <body>
+    <a class="skip-link" href="#main-content">跳到主要内容</a>
     <header class="site-header">
       <div class="wrap">
         <a class="site-title" href="/">{siteTitle}</a>
-        <nav class="nav">
-          <a href="/projects/">项目</a>
-          <a href="/blog/">文章</a>
-          <a href="/about/">关于</a>
+        <nav class="nav" aria-label="主导航">
+          <a href="/projects/" aria-current={currentPath.startsWith('/projects') ? 'page' : undefined}>项目</a>
+          <a href="/lab/" aria-current={currentPath.startsWith('/lab') ? 'page' : undefined}>演示</a>
+          <a href="/blog/" aria-current={currentPath.startsWith('/blog') ? 'page' : undefined}>文章</a>
+          <a href="/about/" aria-current={currentPath.startsWith('/about') ? 'page' : undefined}>关于</a>
         </nav>
       </div>
     </header>
 
-    <main>
+    <main id="main-content">
       <div class="wrap">
         <slot />
       </div>
@@ -39,7 +42,8 @@ const siteTitle = '王余勃';
 
     <footer class="site-footer">
       <div class="wrap">
-        <span>长江大学 · 计算机科学与技术 · 2028 届</span>
+        <span>yunyi-star · 工程实践与技术复盘</span>
+        <a href="https://github.com/yunyi-star/yunyi-star.github.io" rel="noopener noreferrer">本站源码</a>
       </div>
     </footer>
   </body>

@@ -17,27 +17,29 @@ const d = project.data;
 ---
 
 <BaseLayout title={d.name} description={d.subtitle ?? d.role}>
+  <p class="project-category">{d.category}</p>
   <h1>{d.name}</h1>
   {d.subtitle && <p class="lede">{d.subtitle}</p>}
 
   <div class="kv">
     <div class="kv-row"><span class="kv-k">年份</span><span class="kv-v">{d.year}</span></div>
-    <div class="kv-row"><span class="kv-k">我的角色</span><span class="kv-v">{d.role}</span></div>
+    <div class="kv-row"><span class="kv-k">实践重点</span><span class="kv-v">{d.role}</span></div>
     <div class="kv-row">
       <span class="kv-k">技术栈</span>
       <span class="kv-v">{d.stack.join(' · ')}</span>
     </div>
     <div class="kv-row"><span class="kv-k">状态</span><span class="kv-v">{d.status}</span></div>
+    <div class="kv-row"><span class="kv-k">公开内容</span><span class="kv-v">{d.disclosure}</span></div>
     {d.repo && (
       <div class="kv-row">
         <span class="kv-k">代码</span>
-        <span class="kv-v"><a href={d.repo} target="_blank" rel="noopener">{d.repo}</a></span>
+        <span class="kv-v"><a href={d.repo} target="_blank" rel="noopener noreferrer">查看公开代码仓库</a></span>
       </div>
     )}
     {d.demo && (
       <div class="kv-row">
         <span class="kv-k">演示</span>
-        <span class="kv-v"><a href={d.demo} target="_blank" rel="noopener">{d.demo}</a></span>
+        <span class="kv-v"><a href={d.demo}>打开独立交互示例</a></span>
       </div>
     )}
   </div>

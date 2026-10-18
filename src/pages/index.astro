@@ -1,48 +1,48 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getPosts, getProjects, fmtDate as fmt } from '../lib/collections';
+import ProjectCard from '../components/ProjectCard.astro';
 
 const posts = (await getPosts()).slice(0, 5);
 const projects = (await getProjects()).slice(0, 4);
 ---
 
 <BaseLayout
-  title="王余勃 · 机器人与工控安全"
-  description="嵌入式、机器人系统、工控安全。把做过的东西和踩过的坑写清楚。"
+  title="yunyi-star · 机器人与软件工程实践"
+  description="移动机器人、社区巡检、工控通信、视觉路由与 Web 应用的项目档案和可交互示例。"
 >
-  <h1>把机器人调通，也把过程写清楚</h1>
+  <h1>把系统接起来，<br />把关键判断写清楚。</h1>
   <p class="lede">
-    长江大学计算机科学与技术专业，2028 届。做嵌入式、机器人系统（ROS / SLAM /
-    机械臂 / 视觉部署）和工控安全（PLC / 协议设计）。这里放项目档案和工程复盘。
+    我是 yunyi-star。这里记录围绕机器人与软件系统做过的项目：
+    从导航、视觉与机械臂的协作，到工控通信和模型工具接入。
+    每份档案都写清已有实现、技术取舍，以及可以直接查看的部分。
   </p>
+  <div class="home-actions">
+    <a class="primary-link" href="/projects/">查看项目档案</a>
+    <a href="/lab/">体验两个交互演示</a>
+  </div>
 
   <div class="section-head">
     <h2>项目档案</h2>
-    <a href="/projects/">全部 →</a>
+    <a href="/projects/">查看全部</a>
   </div>
   {
     projects.length === 0 ? (
-      <p class="meta">还没有项目档案。往 src/content/projects/ 里放 .md 就会出现。</p>
+      <p class="meta">项目档案正在整理。</p>
     ) : (
       projects.map((p) => (
-        <a class="card" href={`/projects/${p.id}/`}>
-          <p class="card-title">{p.data.name}</p>
-          <p class="card-sum">
-            {p.data.role} · {p.data.year} · {p.data.status}
-            {p.data.subtitle ? ` — ${p.data.subtitle}` : ''}
-          </p>
-        </a>
+        <ProjectCard project={p} />
       ))
     )
   }
 
   <div class="section-head">
     <h2>最近写的</h2>
-    <a href="/blog/">全部 →</a>
+    <a href="/blog/">查看全部</a>
   </div>
   {
     posts.length === 0 ? (
-      <p class="meta">还没有文章。往 src/content/blog/ 里放 .md 就会出现。</p>
+      <p class="meta">工程复盘正在整理。</p>
     ) : (
       posts.map((post) => (
         <a class="card" href={`/blog/${post.id}/`}>
