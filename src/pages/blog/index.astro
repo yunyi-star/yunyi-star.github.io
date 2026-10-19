@@ -5,9 +5,9 @@ import { getPosts, fmtDate as fmt } from '../../lib/collections';
 const posts = await getPosts();
 ---
 
-<BaseLayout title="文章" description="工程复盘与技术记录">
-  <h1>文章</h1>
-  <p class="lede">调试过程、方案取舍、失败尝试。共 {posts.length} 篇。</p>
+<BaseLayout title="工程复盘" description="从具体故障、排查证据与失败尝试，到修复和验证结果。">
+  <h1>工程复盘</h1>
+  <p class="lede">问题怎样出现，如何排查，哪些尝试失败了，最后改了什么。共 {posts.length} 篇。</p>
 
   {
     posts.map((post) => (

@@ -14,6 +14,19 @@
 
 可运行示例说明见 [examples/README.md](examples/README.md)。示例为本站独立编写，使用虚构数据，不连接真实设备、读取个人文件或调用外部模型。
 
+## 我面对问题时，具体怎样解决
+
+| 复盘 | 问题与排查主线 |
+| --- | --- |
+| [机械臂投放后扫飞物块](src/content/blog/arm-release-ik.md) | 从落点误差追到 IK 分支跳变，再检查驱动返回与实际停稳的时序 |
+| [地图假墙与雷达自打](src/content/blog/simulation-phantom-obstacles.md) | 位姿、材质、地图生成与雷达观测分开做对照，避免只调规划器 |
+| [路线漂移的多轮迭代](src/content/blog/navigation-drift-iterations.md) | 门架误判、控制死锁、定位与视觉互相带偏，以及失败试验的回退 |
+| [检测框存在但计数为零](src/content/blog/recognition-counting-debug.md) | 检测、后处理、时间窗口、数据标注分别取证，保留实际边界错误 |
+| [PLC 通信与提交写尾延迟](src/content/blog/plc-link-and-tail-latency.md) | 从物理链路查到写后回读、状态窗口和延迟尖峰 |
+| [视觉路由输入兼容](src/content/blog/vision-router-normalization.md) | 嵌套内容、文档本地提取、透明转发、SSE 与缓存语义的取舍 |
+
+以上依据当时的工作记录、补丁与实现整理。历史实验数字注明环境和版本，不冒充本次重测；失败尝试与未完成的改进也保留下来。
+
 ## 开发与检查
 
 使用 Node.js 22.12+ 和 npm 9.6.5+。站点保留 Astro 与 Markdown 内容集合，无额外运行时服务或分析追踪。
